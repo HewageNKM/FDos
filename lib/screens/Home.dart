@@ -13,28 +13,10 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          IconButton(
-            padding: const EdgeInsets.symmetric(horizontal: 50),
-            focusColor: Colors.black,
-            onPressed: handleNavigationClick("home"),
-            icon: const Icon(
-              Icons.home,
-              size: 40,
-            ),
-          ),
-          IconButton(
-            color: Colors.brown,
-            focusColor: Colors.black,
-            onPressed: handleNavigationClick("home"),
-            icon: const Icon(
-              Icons.add,
-              size: 40,
-            ),
-          ),
-        ],
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.green,
+        onPressed: handleNavigationClick(''),
+        child: const Icon(Icons.add),
       ),
       appBar: AppBar(
         title: const Padding(
@@ -59,8 +41,26 @@ class _HomeState extends State<Home> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                child: TextField(),
-              )
+                child: const TextField(
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.search),
+                      contentPadding: EdgeInsets.all(8),
+                      hintText: "Search"),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 30),
+                child: const Row(
+                  children: [
+                    Text("All",
+                        style: TextStyle(
+                            fontSize: 50, fontWeight: FontWeight.bold))
+                  ],
+                ),
+              ),
+              const Column(children: [
+
+              ],)
             ],
           ),
         ),
