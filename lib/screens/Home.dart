@@ -26,8 +26,8 @@ class _HomeState extends State<Home> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
+                  border: Border.all(width: 1.3),
                   borderRadius: BorderRadius.circular(16),
-                  color: Colors.grey,
                 ),
                 child: const TextField(
                   maxLines: 1,
@@ -68,31 +68,44 @@ Future<void> _add_dialog(BuildContext context) {
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Center(child: Text('Add Note')),
-        content: Column(
-          children: [form_field("To Do", 16, 16, 8, null, 16)],
+      return Dialog(
+        child: SizedBox(
+          height: 220,
+          child: AlertDialog.adaptive(
+            contentPadding: const EdgeInsets.all(8),
+            insetPadding: const EdgeInsets.all(8),
+            actionsPadding: const EdgeInsets.all(8),
+            title: const Center(
+                child: Text(
+              'Add Note',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+            )),
+            content: Column(
+              // Ensures content does not overflow
+              children: [form_field("Do home work.....", 8, 8, 8, null, 8)],
+            ),
+            actions: <Widget>[
+              TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: Theme.of(context).textTheme.labelLarge,
+                ),
+                child: const Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: Theme.of(context).textTheme.labelLarge,
+                ),
+                child: const Text('Add'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
         ),
-        actions: <Widget>[
-          TextButton(
-            style: TextButton.styleFrom(
-              textStyle: Theme.of(context).textTheme.labelLarge,
-            ),
-            child: const Text('Cancel'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          TextButton(
-            style: TextButton.styleFrom(
-              textStyle: Theme.of(context).textTheme.labelLarge,
-            ),
-            child: const Text('Add'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
       );
     },
   );
@@ -100,20 +113,20 @@ Future<void> _add_dialog(BuildContext context) {
 
 Widget form_field(String placeholder, double roundedSize, double hPadding,
     double vPadding, IconData? icon, double innerPadding) {
-  return Container(
-    padding:
-        EdgeInsets.symmetric(horizontal: hPadding, vertical: vPadding ?? 0),
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(16),
-      color: Colors.grey,
-    ),
-    child: TextField(
-      maxLines: 1,
-      decoration: InputDecoration(
-        border: const UnderlineInputBorder(borderSide: BorderSide.none),
-        prefixIcon: Icon(icon),
-        contentPadding: EdgeInsets.all(innerPadding),
-        hintText: placeholder,
+  return ClipRect(
+    child: Container(
+      decoration: BoxDecoration(
+        border: Border.all(),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: TextField(
+        style: const TextStyle(fontSize: 16),
+        maxLines: 1,
+        decoration: InputDecoration(
+          border: const UnderlineInputBorder(borderSide: BorderSide.none),
+          contentPadding: EdgeInsets.all(innerPadding),
+          hintText: placeholder,
+        ),
       ),
     ),
   );
